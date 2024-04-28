@@ -14,7 +14,7 @@
 - 修改application.yml文件的spring.datasource.password属性为自己数据库的密码
 
 
-- 运行/AssetControllerSystem/Redis-x64-3.2.100/start.bat文件启动Redis
+- 运行/AssetControllerSystem/Redis-x64-3.2.100/redis-server.exe文件启动Redis
 
 
 - 打开终端（cmd）
