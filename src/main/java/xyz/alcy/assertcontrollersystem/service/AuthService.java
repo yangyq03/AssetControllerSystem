@@ -2,6 +2,7 @@ package xyz.alcy.assertcontrollersystem.service;
 
 
 import xyz.alcy.assertcontrollersystem.pojo.User;
+import xyz.alcy.assertcontrollersystem.pojo.UserDTO;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface AuthService {
     User findByUsername(String username);
 
     //更新用户信息
-    void update(User user);
+    void update(UserDTO userDTO);
 
     //修改用户密码
     void updatePwd(String newPwd);

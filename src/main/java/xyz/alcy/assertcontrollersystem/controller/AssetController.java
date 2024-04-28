@@ -21,17 +21,16 @@ public class AssetController {
     }
 
     // 获取资产信息
-    @GetMapping("/{assetNumber}")
-    public Result<Asset> getAsset(@PathVariable String assetNumber) {
+    @GetMapping
+    public Result<Asset> getAsset(@RequestParam String assetNumber) {
         Asset asset = assetService.getAsset(assetNumber);
         return Result.success(asset);
     }
 
     // 更新资产信息
-    @PutMapping("/manage/{assetNumber}")
-    private Result assetUpdate(@PathVariable String assetNumber,
-                               @RequestBody Asset asset) {
-        assetService.updateAsset(assetNumber, asset);
+    @PutMapping("/manage/")
+    private Result assetUpdate(@RequestBody Asset asset) {
+        assetService.updateAsset(asset.getAssetNumber(), asset);
         return Result.success();
     }
 }

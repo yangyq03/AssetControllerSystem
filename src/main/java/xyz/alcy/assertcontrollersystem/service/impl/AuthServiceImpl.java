@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.alcy.assertcontrollersystem.mapper.AuthMapper;
 import xyz.alcy.assertcontrollersystem.pojo.User;
+import xyz.alcy.assertcontrollersystem.pojo.UserDTO;
 import xyz.alcy.assertcontrollersystem.service.AuthService;
 import xyz.alcy.assertcontrollersystem.utils.Md5Util;
 import xyz.alcy.assertcontrollersystem.utils.ThreadLocalUtil;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -33,10 +33,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void update(User user) {
-        //修改用户更新时间
-        user.setUpdateTime(LocalDateTime.now());
-        authMapper.update(user);
+    public void update(UserDTO userDTO) {
+        authMapper.update(userDTO);
     }
 
     @Override

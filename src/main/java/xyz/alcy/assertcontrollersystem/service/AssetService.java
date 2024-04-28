@@ -7,5 +7,5 @@ public interface AssetService {
 
     Asset getAsset(String assetNumber);
 
-    void updateAsset(String assetNumber, Asset asset);
+    void updateAsset(Integer assetNumber, Asset asset);
 }

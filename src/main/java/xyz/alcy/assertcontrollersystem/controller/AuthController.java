@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import xyz.alcy.assertcontrollersystem.pojo.Result;
 import xyz.alcy.assertcontrollersystem.pojo.User;
+import xyz.alcy.assertcontrollersystem.pojo.UserDTO;
 import xyz.alcy.assertcontrollersystem.service.AuthService;
 import xyz.alcy.assertcontrollersystem.utils.JwtUtil;
 import xyz.alcy.assertcontrollersystem.utils.Md5Util;
@@ -83,12 +84,19 @@ public class AuthController {
 
     //更新用户信息
     @PutMapping("/update")
-    public Result update(@RequestBody User user) {
-        String username = user.getUsername();
-        if (username != null && authService.findByUsername(username) != null) {
+    public Result update(@RequestBody UserDTO userDTO) {
+        Map<String, Object> map = ThreadLocalUtil.get();
+        //通过ThreadLocal获取修改之前的用户名
+        String oldUsername = (String) map.get("username");
+        //修改之后的用户名
+        String newUsername = userDTO.getUsername();
+        //判断用户名是否已经被占用，保证用户名的唯一性
+        if (newUsername != null &&
+                !oldUsername.equals(newUsername) &&     //如果修改了用户名
+                authService.findByUsername(newUsername) != null) {
             return Result.error("用户名已被占用");
         }
-        authService.update(user);
+        authService.update(userDTO);
         return Result.success();
     }
 

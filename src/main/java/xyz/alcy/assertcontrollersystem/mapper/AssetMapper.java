@@ -17,5 +17,5 @@ public interface AssetMapper {
     Asset getAsset(String assetNumber);
 
     @Update("")
-    void updateAsset(String assetNumber, Asset asset);
+    void updateAsset(Integer assetNumber, Asset asset);
 }

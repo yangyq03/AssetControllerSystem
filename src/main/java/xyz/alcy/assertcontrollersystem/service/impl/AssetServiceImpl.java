@@ -27,7 +27,7 @@ public class AssetServiceImpl implements AssetService {
     }
 
     @Override
-    public void updateAsset(String assetNumber, Asset asset) {
+    public void updateAsset(Integer assetNumber, Asset asset) {
         assetMapper.updateAsset(assetNumber, asset);
     }
 }

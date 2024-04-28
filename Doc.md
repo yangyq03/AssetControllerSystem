@@ -166,7 +166,7 @@ username=zhangsan&password=123456
 >
 > 请求方式：PUT
 >
-> 接口描述：该接口用于更新已登录用户的基本信息(除头像和密码)
+> 接口描述：该接口用于更新已登录用户的基本信息(除了用户角色和密码)
 
 #### 1.4.2 请求参数
 
@@ -182,11 +182,11 @@ username=zhangsan&password=123456
 
 请求数据样例：
 
-```shell
+```json
 {
     "id":5,
     "username":"wangba",
-    "email":"wb@itcast.cn"
+    "email":"zhangsan@gmail.com"
 }
 ```
 

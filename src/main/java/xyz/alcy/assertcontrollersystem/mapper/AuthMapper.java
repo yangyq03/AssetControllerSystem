@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import xyz.alcy.assertcontrollersystem.pojo.User;
+import xyz.alcy.assertcontrollersystem.pojo.UserDTO;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface AuthMapper {
 
     //更新用户
     @Update("update users set username=#{username}, email=#{email}, update_time=now() where id=#{id}")
-    void update(User user);
+    void update(UserDTO userDTO);
 
     //更新用户密码
     @Update("update users set password=#{newPwd},update_time=now() where id=#{userId}")
