@@ -84,7 +84,7 @@ public class AuthController {
 
     //更新用户信息
     @PutMapping("/update")
-    public Result update(@RequestBody UserDTO userDTO) {
+    public Result update(@RequestBody UserDTO userDTO, @RequestHeader("Authorization") String token) {
         Map<String, Object> map = ThreadLocalUtil.get();
         //通过ThreadLocal获取修改之前的用户名
         String oldUsername = (String) map.get("username");
@@ -95,6 +95,11 @@ public class AuthController {
                 !oldUsername.equals(newUsername) &&     //如果修改了用户名
                 authService.findByUsername(newUsername) != null) {
             return Result.error("用户名已被占用");
+        }
+        //如果修改了用户名，删除redis中对应的token
+        if (!oldUsername.equals(newUsername)) {
+            ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
+            operations.getOperations().delete(token);
         }
         authService.update(userDTO);
         return Result.success();
