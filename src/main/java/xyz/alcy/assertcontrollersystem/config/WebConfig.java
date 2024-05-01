@@ -21,6 +21,6 @@ public class WebConfig implements WebMvcConfigurer {
         //登录相关
         registry.addInterceptor(loginInterceptors).excludePathPatterns("/api/auth/login", "/api/auth/register");
         //管理员相关
-        registry.addInterceptor(adminInterceptors).addPathPatterns("/api/user/updateRole", "/api/asset/manage/**");
+        registry.addInterceptor(adminInterceptors).addPathPatterns("/api/auth/updateRole", "/api/asset/manage/**");
     }
 }

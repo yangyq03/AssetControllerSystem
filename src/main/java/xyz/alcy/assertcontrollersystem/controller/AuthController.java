@@ -67,7 +67,7 @@ public class AuthController {
             String token = JwtUtil.genToken(claims);
             //把token存储在Redis中
             ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
-            operations.set(token, token, 3, TimeUnit.DAYS);
+            operations.set(username, token, 3, TimeUnit.DAYS);
             return Result.success(token);
         }
         return Result.error("密码错误");
@@ -84,7 +84,7 @@ public class AuthController {
 
     //更新用户信息
     @PutMapping("/update")
-    public Result update(@RequestBody UserDTO userDTO, @RequestHeader("Authorization") String token) {
+    public Result update(@RequestBody UserDTO userDTO) {
         Map<String, Object> map = ThreadLocalUtil.get();
         //通过ThreadLocal获取修改之前的用户名
         String oldUsername = (String) map.get("username");
@@ -99,7 +99,7 @@ public class AuthController {
         //如果修改了用户名，删除redis中对应的token
         if (!oldUsername.equals(newUsername)) {
             ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
-            operations.getOperations().delete(token);
+            operations.getOperations().delete(oldUsername);
         }
         authService.update(userDTO);
         return Result.success();
@@ -132,13 +132,13 @@ public class AuthController {
         authService.updatePwd(newPwd);
         //删除redis中对应的token
         ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
-        operations.getOperations().delete(token);
+        operations.getOperations().delete(username);
         return Result.success();
     }
 
     //修改其他用户的角色
     @PatchMapping("/updateRole")
-    public Result updateRole(@RequestBody Map<String, String> params) {
+    public Result updateRole(@RequestBody Map<String, String> params, @RequestHeader("Authorization") String token) {
         String username = params.get("username");
         String role = params.get("role");
         //参数校验
@@ -164,6 +164,9 @@ public class AuthController {
             return Result.success();
         }
         authService.updateRole(username, role);
+        //删除redis中对应的token
+        ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
+        operations.getOperations().delete(username);
         return Result.success();
     }
 

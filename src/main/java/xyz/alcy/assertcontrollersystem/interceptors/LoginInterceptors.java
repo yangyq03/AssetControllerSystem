@@ -26,12 +26,18 @@ public class LoginInterceptors implements HandlerInterceptor {
         try {
             //从redis中获取相同的token
             ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
-            String redisToken = operations.get(token);
+            //解码jwt令牌
+            Map<String, Object> claims = JwtUtil.parseToken(token);
+            //获得用户名，并在redis中查找是否有相应的token
+            String redisToken = operations.get(claims.get("username"));
             if (redisToken == null) {
                 //token已经失效
                 throw new RuntimeException();
             }
-            Map<String, Object> claims = JwtUtil.parseToken(token);
+            if (!redisToken.equals(token)) {
+                //token不一致
+                throw new RuntimeException();
+            }
             //把业务数据存储到ThreadLocal中
             ThreadLocalUtil.set(claims);
             //没有抛异常说明token验证成功，放回true，放行

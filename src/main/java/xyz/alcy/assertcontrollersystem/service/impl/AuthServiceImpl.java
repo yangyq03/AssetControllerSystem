@@ -34,6 +34,10 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void update(UserDTO userDTO) {
+        //通过ThreadLocal获取创建者id
+        Map<String, Object> map = ThreadLocalUtil.get();
+        Integer userId = (Integer) map.get("id");
+        userDTO.setId(userId);
         authMapper.update(userDTO);
     }
 

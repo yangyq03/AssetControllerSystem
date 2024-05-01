@@ -9,7 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserDTO {
-    @NonNull
     private Integer id;
     private String username;
     @NotEmpty

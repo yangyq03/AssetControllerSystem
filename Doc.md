@@ -176,7 +176,6 @@ username=zhangsan&password=123456
 
 | 参数名称     | 说明   | 类型     | 是否必须 | 备注        |
 |----------|------|--------|------|-----------|
-| id       | 主键ID | number | 是    |           |
 | username | 用户名  | string | 否    | 5~16位非空字符 |
 | email    | 邮箱   | string | 是    | 满足邮箱的格式   |
 
@@ -184,7 +183,6 @@ username=zhangsan&password=123456
 
 ```json
 {
-    "id":5,
     "username":"wangba",
     "email":"zhangsan@gmail.com"
 }
@@ -324,7 +322,9 @@ username=zhangsan&password=123456
 
 #### 1.7.4 备注说明
 
-> 不能修改当前登录用户的角色
+> 不能修改**当前登录用户**的角色
+> 
+> 修改了用户角色后，被修改的用户将要**重新登陆**
 
 ### 1.7 获取所有用户的信息
 

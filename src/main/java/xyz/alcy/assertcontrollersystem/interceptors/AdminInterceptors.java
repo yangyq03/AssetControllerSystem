@@ -14,16 +14,14 @@ public class AdminInterceptors implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        //获取token
-        String token = request.getHeader("Authorization");
         //通过token取得业务数据并获取用户角色
         Map<String, Object> map = ThreadLocalUtil.get();
         String role = (String) map.get("role");
-        //如果不是管理员，拦截
-        if (!"admin".equals(role)) {
+        if ("admin".equals(role)) {
             return true;
         } else {
-            response.setStatus(401);
+            //如果不是管理员，拦截
+            response.setStatus(403);
             return false;
         }
     }
