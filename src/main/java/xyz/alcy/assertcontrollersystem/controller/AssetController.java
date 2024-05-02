@@ -9,6 +9,7 @@ import xyz.alcy.assertcontrollersystem.service.AssetService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/asset")
 public class AssetController {
