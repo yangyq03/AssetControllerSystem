@@ -1,11 +1,18 @@
 package xyz.alcy.assertcontrollersystem.service;
 
 import xyz.alcy.assertcontrollersystem.pojo.Asset;
+import xyz.alcy.assertcontrollersystem.pojo.AssetDTO;
+
+import java.util.List;
 
 public interface AssetService {
-    void addAsset(Asset asset);
+    void addAsset(AssetDTO assetDTO);
 
-    Asset getAsset(String assetNumber);
+    List<Asset> getAllAssets();
 
-    void updateAsset(Integer assetNumber, Asset asset);
+    Asset getAsset(Integer assetNumber);
+
+    void updateAsset(AssetDTO assetDTO);
+
+    void deleteAsset(Integer assetNumber);
 }

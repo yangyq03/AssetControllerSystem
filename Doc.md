@@ -174,17 +174,17 @@ username=zhangsan&password=123456
 
 请求参数说明：
 
-| 参数名称     | 说明   | 类型     | 是否必须 | 备注        |
-|----------|------|--------|------|-----------|
-| username | 用户名  | string | 否    | 5~16位非空字符 |
-| email    | 邮箱   | string | 是    | 满足邮箱的格式   |
+| 参数名称     | 说明  | 类型     | 是否必须 | 备注        |
+|----------|-----|--------|------|-----------|
+| username | 用户名 | string | 否    | 5~16位非空字符 |
+| email    | 邮箱  | string | 是    | 满足邮箱的格式   |
 
 请求数据样例：
 
 ```json
 {
-    "username":"wangba",
-    "email":"zhangsan@gmail.com"
+  "username": "wangba",
+  "email": "zhangsan@gmail.com"
 }
 ```
 
@@ -323,7 +323,7 @@ username=zhangsan&password=123456
 #### 1.7.4 备注说明
 
 > 不能修改**当前登录用户**的角色
-> 
+>
 > 修改了用户角色后，被修改的用户将要**重新登陆**
 
 ### 1.7 获取所有用户的信息
@@ -384,3 +384,290 @@ username=zhangsan&password=123456
   ]
 }
 ```
+
+## 2. 资产相关接口
+
+### 2.1 添加资产信息
+
+#### 2.1.1 基本信息
+
+> 请求路径：/api/asset/add
+>
+> 请求方式：POST
+>
+> 接口描述：添加资产信息
+
+#### 2.1.2 请求参数
+
+请求参数格式：application/json
+
+请求参数说明：
+
+| 参数                 | 类型         | 描述                           | 是否必需 |
+|--------------------|------------|------------------------------|------|
+| assetName          | String     | 资产名称                         | 否    |
+| assetCategory      | String     | 资产类别                         | 否    |
+| assetStatus        | String     | 资产状态                         | 否    |
+| assetBrand         | String     | 资产品牌                         | 否    |
+| assetModel         | String     | 资产型号                         | 否    |
+| assetQuantity      | Integer    | 资产数量                         | 否    |
+| assetSpecification | String     | 资产规格                         | 否    |
+| assetValue         | BigDecimal | 资产价值                         | 否    |
+| purchaseDate       | String     | 购买日期（格式：yyyy-MM-dd HH:mm:ss） | 否    |
+| departmentUsed     | String     | 使用部门                         | 否    |
+
+请求数据样例：
+
+```json
+{
+  "assetName": "笔记本电脑",
+  "assetCategory": "IT设备",
+  "assetStatus": "在库",
+  "assetBrand": "Dell",
+  "assetModel": "Latitude E7450",
+  "assetQuantity": 1,
+  "assetSpecification": "15.6英寸，i7处理器，16GB内存",
+  "assetValue": 5000.00,
+  "purchaseDate": "2024-04-30 10:00:00",
+  "departmentUsed": "信息技术部"
+}
+```
+
+#### 2.1.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+| 名称      | 类型     | 是否必须 | 默认值 | 备注             | 其他信息 |
+|---------|--------|------|-----|----------------|------|
+| code    | number | 必须   |     | 响应码, 0-成功,1-失败 |      |
+| message | string | 非必须  |     | 提示信息           |      |
+| data    | object | 非必须  |     | 返回的数据          |      |
+
+响应数据样例：
+
+```json
+{
+  "code": 0,
+  "message": "操作成功",
+  "data": null
+}
+```
+
+### 2.2 获取所有资产信息
+
+#### 2.2.1 基本信息
+
+> 请求路径：/api/asset/getAllAssets
+>
+> 请求方式：GET
+>
+> 接口描述：获取所有资产信息
+
+#### 2.2.2 请求参数
+
+无
+
+#### 2.2.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+| 名称      | 类型     | 是否必须 | 默认值 | 备注             | 其他信息 |
+|---------|--------|------|-----|----------------|------|
+| code    | number | 必须   |     | 响应码, 0-成功,1-失败 |      |
+| message | string | 非必须  |     | 提示信息           |      |
+| data    | object | 非必须  |     | 返回的数据          |      |
+
+响应数据样例：
+
+```json
+{
+  "code": 0,
+  "message": "操作成功",
+  "data": [
+    {
+      "assetNumber": 1,
+      "assetName": "笔记本电脑",
+      "assetCategory": "IT设备",
+      "assetStatus": "在库",
+      "assetBrand": "Dell",
+      "assetModel": "Latitude E7450",
+      "assetQuantity": 1,
+      "assetSpecification": "15.6英寸，i7处理器，16GB内存",
+      "assetValue": 5000.00,
+      "purchaseDate": "2024-04-30 10:00:00",
+      "departmentUsed": "信息技术部"
+    }
+  ]
+}
+```
+
+### 2.3 获取指定资产信息
+
+#### 2.3.1 基本信息
+
+> 请求路径：/api/asset/
+>
+> 请求方式：GET
+>
+> 接口描述：获取指定资产信息
+
+#### 2.3.2 请求参数
+
+| 参数          | 类型      | 描述   | 是否必需 |
+|-------------|---------|------|------|
+| assetNumber | Integer | 资产编号 | 是    |
+
+请求数据样例：
+
+```shell
+/api/asset?assetNumber=1
+```
+
+#### 2.3.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+| 名称      | 类型     | 是否必须 | 默认值 | 备注             | 其他信息 |
+|---------|--------|------|-----|----------------|------|
+| code    | number | 必须   |     | 响应码, 0-成功,1-失败 |      |
+| message | string | 非必须  |     | 提示信息           |      |
+| data    | object | 非必须  |     | 返回的数据          |      |
+
+响应数据样例：
+
+```json
+{
+  "code": 0,
+  "message": "操作成功",
+  "data": {
+    "assetNumber": 1,
+    "assetName": "笔记本电脑",
+    "assetCategory": "IT设备",
+    "assetStatus": "在库",
+    "assetBrand": "Dell",
+    "assetModel": "Latitude E7450",
+    "assetQuantity": 1,
+    "assetSpecification": "15.6英寸，i7处理器，16GB内存",
+    "assetValue": 5000.00,
+    "purchaseDate": "2024-04-30 10:00:00",
+    "departmentUsed": "信息技术部"
+  }
+}
+```
+
+### 2.4 更新指定资产信息
+
+#### 2.4.1 基本信息
+
+> 请求路径：/api/asset/update
+>
+> 请求方式：PUT
+>
+> 接口描述：更新指定资产信息
+
+#### 2.4.2 请求参数
+
+| 参数名称               | 说明   | 类型         | 是否必须 | 备注 |
+|--------------------|------|------------|------|----|
+| assetNumber        | 资产编号 | Integer    | 是    |    |
+| assetName          | 资产名称 | String     | 是    |    |
+| assetCategory      | 资产类别 | String     | 是    |    |
+| assetStatus        | 资产状态 | String     | 是    |    |
+| assetBrand         | 资产品牌 | String     | 是    |    |
+| assetModel         | 资产型号 | String     | 是    |    |
+| assetQuantity      | 资产数量 | Integer    | 是    |    |
+| assetSpecification | 资产规格 | String     | 是    |    |
+| assetValue         | 资产价值 | BigDecimal | 是    |    |
+| purchaseDate       | 购买日期 | String     | 是    |    |
+| departmentUsed     | 使用部门 | String     | 是    |    |
+
+请求数据样例：
+
+```json
+{
+  "assetNumber": 2,
+  "assetName": "台式电脑",
+  "assetCategory": "IT设备",
+  "assetStatus": "在库",
+  "assetBrand": "Dell",
+  "assetModel": "Latitude E7450",
+  "assetQuantity": 1,
+  "assetSpecification": "15.6英寸，i7处理器，16GB内存",
+  "assetValue": 10000.00,
+  "purchaseDate": "2024-04-30 10:00:00",
+  "departmentUsed": "信息技术部"
+}
+```
+
+#### 2.4.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+| 名称      | 类型     | 是否必须 | 默认值 | 备注             | 其他信息 |
+|---------|--------|------|-----|----------------|------|
+| code    | number | 必须   |     | 响应码, 0-成功,1-失败 |      |
+| message | string | 非必须  |     | 提示信息           |      |
+| data    | object | 非必须  |     | 返回的数据          |      |
+
+响应数据样例：
+
+```json
+{
+  "code": 0,
+  "message": "操作成功",
+  "data": null
+}
+```
+
+### 2.5 删除指定资产信息
+
+#### 2.5.1 基本信息
+
+> 请求路径：/api/asset/delete
+>
+> 请求方式：DELETE
+>
+> 接口描述：删除指定资产信息
+
+#### 2.5.2 请求参数
+
+| 参数名称        | 说明   | 类型      | 是否必须 | 备注 |
+|-------------|------|---------|------|----|
+| assetNumber | 资产编号 | Integer | 是    |    |
+
+请求数据样例：
+
+```shell
+/api/asset/manage/delete?assetNumber=2
+```
+
+#### 2.5.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+| 名称      | 类型     | 是否必须 | 默认值 | 备注             | 其他信息 |
+|---------|--------|------|-----|----------------|------|
+| code    | number | 必须   |     | 响应码, 0-成功,1-失败 |      |
+| message | string | 非必须  |     | 提示信息           |      |
+| data    | object | 非必须  |     | 返回的数据          |      |
+
+响应数据样例：
+
+```json
+{
+  "code": 0,
+  "message": "操作成功",
+  "data": null
+}
+```
+
