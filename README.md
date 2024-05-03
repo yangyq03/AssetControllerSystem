@@ -14,19 +14,19 @@
 - 修改application.yml文件的spring.datasource.password属性为自己数据库的密码
 
 
-- 运行/AssetControllerSystem/Redis-x64-3.2.100/redis-server.exe文件启动Redis
+- 运行```/AssetControllerSystem/Redis-x64-3.2.100/redis-server.exe```文件启动Redis
 
 
 - 打开终端（cmd）
 
 
-- cd 到项目根目录(/AssetControllerSystem)下
+- cd 到项目根目录(```/AssetControllerSystem```)下
 
 
 - 运行命令```mvn clean package```打包项目
 
 
-- cd 到/AssetControllerSystem/target目录下
+- cd 到```/AssetControllerSystem/target```目录下
 
 
 - 运行命令```java -jar ./AssetControllerSystem-0.0.1-SNAPSHOT.jar```
