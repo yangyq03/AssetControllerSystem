@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/asset_manager_db
     username: root
-    password: "your password"
+    password: "@20030209yyq"
   data:
     redis:
       host: localhost

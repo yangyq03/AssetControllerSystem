@@ -107,7 +107,7 @@ public class AuthController {
 
     //更新用户密码
     @PatchMapping("/updatePwd")
-    public Result updatePwd(@RequestBody Map<String, String> params, @RequestHeader("Authorization") String token) {
+    public Result updatePwd(@RequestBody Map<String, String> params) {
         //校验参数
         String oldPwd = params.get("old_pwd");
         String newPwd = params.get("new_pwd");
@@ -138,7 +138,7 @@ public class AuthController {
 
     //修改其他用户的角色
     @PatchMapping("/updateRole")
-    public Result updateRole(@RequestBody Map<String, String> params, @RequestHeader("Authorization") String token) {
+    public Result updateRole(@RequestBody Map<String, String> params) {
         String username = params.get("username");
         String role = params.get("role");
         //参数校验
