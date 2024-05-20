@@ -22,12 +22,11 @@
 |----------|------|--------|------|------------------|
 | username | 用户名  | string | 是    | 5~16为非空字符        |
 | password | 密码   | string | 是    | 5~16为非空字符        |
-| role     | 用户角色 | string | 是    | 值只能是admin或common |
 
 请求数据样例：
 
 ```shell
-username=zhangsan&password=123456&role=admin
+username=zhangsan&password=123456
 ```
 
 #### 1.1.3 响应数据
@@ -51,6 +50,13 @@ username=zhangsan&password=123456&role=admin
   "data": null
 }
 ```
+#### 1.1.4 备注说明
+
+> 该注册接口仅用于注册**普通用户**
+> 
+> 如果需要管理员身份，需要通过**管理员账号修改用户角色**来获取
+> 
+> 系统首次运行时，会生成一个默认管理员账号，用户名为**admin**，密码为**admin**
 
 ### 1.2 登录
 
@@ -113,7 +119,7 @@ username=zhangsan&password=123456
 
 #### 1.3.1 基本信息
 
-> 请求路径：/api/auth/userInfo
+> 请求路径：/api/auth
 >
 > 请求方式：GET
 >
@@ -162,7 +168,7 @@ username=zhangsan&password=123456
 
 #### 1.4.1 基本信息
 
-> 请求路径：/api/auth/update
+> 请求路径：/api/auth
 >
 > 请求方式：PUT
 >
@@ -218,7 +224,7 @@ username=zhangsan&password=123456
 
 #### 1.5.1 基本信息
 
-> 请求路径：/api/auth/updatePwd
+> 请求路径：/api/auth
 >
 > 请求方式：PATCH
 >
@@ -391,7 +397,7 @@ username=zhangsan&password=123456
 
 #### 2.1.1 基本信息
 
-> 请求路径：/api/asset/add
+> 请求路径：/api/asset
 >
 > 请求方式：POST
 >
@@ -459,7 +465,7 @@ username=zhangsan&password=123456
 
 #### 2.2.1 基本信息
 
-> 请求路径：/api/asset/getAllAssets
+> 请求路径：/api/asset
 >
 > 请求方式：GET
 >
@@ -524,7 +530,7 @@ username=zhangsan&password=123456
 请求数据样例：
 
 ```shell
-/api/asset?assetNumber=1
+/api/asset/1
 ```
 
 #### 2.3.3 响应数据
@@ -565,7 +571,7 @@ username=zhangsan&password=123456
 
 #### 2.4.1 基本信息
 
-> 请求路径：/api/asset/update
+> 请求路径：/api/asset
 >
 > 请求方式：PUT
 >
@@ -575,7 +581,6 @@ username=zhangsan&password=123456
 
 | 参数名称               | 说明   | 类型         | 是否必须 | 备注 |
 |--------------------|------|------------|------|----|
-| assetNumber        | 资产编号 | Integer    | 是    |    |
 | assetName          | 资产名称 | String     | 是    |    |
 | assetCategory      | 资产类别 | String     | 是    |    |
 | assetStatus        | 资产状态 | String     | 是    |    |
@@ -589,9 +594,12 @@ username=zhangsan&password=123456
 
 请求数据样例：
 
+```shell
+/api/asset/manage/1
+```
+
 ```json
 {
-  "assetNumber": 2,
   "assetName": "台式电脑",
   "assetCategory": "IT设备",
   "assetStatus": "在库",
@@ -631,7 +639,7 @@ username=zhangsan&password=123456
 
 #### 2.5.1 基本信息
 
-> 请求路径：/api/asset/delete
+> 请求路径：/api/asset/manage
 >
 > 请求方式：DELETE
 >
@@ -646,7 +654,7 @@ username=zhangsan&password=123456
 请求数据样例：
 
 ```shell
-/api/asset/manage/delete?assetNumber=2
+/api/asset/manage/1
 ```
 
 #### 2.5.3 响应数据

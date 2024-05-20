@@ -34,13 +34,12 @@ public class AuthController {
     @PostMapping("/register")
     //role   注册人角色  admin -> 管理员    common -> 普通用户
     public Result register(@Pattern(regexp = "^\\S{5,16}$") String username,
-                           @Pattern(regexp = "^\\S{5,16}$") String password,
-                           @Pattern(regexp = "^(admin|common)$") String role) {
+                           @Pattern(regexp = "^\\S{5,16}$") String password) {
         //在数据库中查找用户名是否已经存在
         User u = authService.findByUsername(username);
         if (u == null) {
             //没有被占用，需要注册
-            authService.register(username, password, role);
+            authService.register(username, password);
             return Result.success();
         } else {
             //已经被占用
@@ -74,7 +73,7 @@ public class AuthController {
     }
 
     //获取用户所有信息
-    @GetMapping("/userInfo")
+    @GetMapping
     public Result<User> userInfo() {
         Map<String, Object> map = ThreadLocalUtil.get();
         String username = (String) map.get("username");
@@ -83,7 +82,7 @@ public class AuthController {
     }
 
     //更新用户信息
-    @PutMapping("/update")
+    @PutMapping
     public Result update(@RequestBody UserDTO userDTO) {
         Map<String, Object> map = ThreadLocalUtil.get();
         //通过ThreadLocal获取修改之前的用户名
@@ -106,7 +105,7 @@ public class AuthController {
     }
 
     //更新用户密码
-    @PatchMapping("/updatePwd")
+    @PatchMapping
     public Result updatePwd(@RequestBody Map<String, String> params) {
         //校验参数
         String oldPwd = params.get("old_pwd");

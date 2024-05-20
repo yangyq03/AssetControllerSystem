@@ -10,7 +10,7 @@
     </parent>
     <groupId>xyz.alcy</groupId>
     <artifactId>AssetControllerSystem</artifactId>
-    <version>0.0.1-RELEASE</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>AssertControllerSystem</name>
     <description>AssertControllerSystem</description>
     <properties>

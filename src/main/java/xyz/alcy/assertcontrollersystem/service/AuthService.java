@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AuthService {
     //注册
-    void register(String username, String password, String role);
+    void register(String username, String password);
 
     //根据用户名查找用户
     User findByUsername(String username);

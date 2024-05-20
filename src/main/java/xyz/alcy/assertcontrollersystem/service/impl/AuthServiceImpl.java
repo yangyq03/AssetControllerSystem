@@ -19,12 +19,12 @@ public class AuthServiceImpl implements AuthService {
     private AuthMapper authMapper;
 
     @Override
-    public void register(String username, String password, String role) {
+    public void register(String username, String password) {
         //使用md5对密码进行加密
         String md5String = Md5Util.getMD5String(password);
 
-        //添加用户
-        authMapper.add(username, md5String, role);
+        //添加用户  默认注册为普通用户
+        authMapper.add(username, md5String, "common");
     }
 
     @Override

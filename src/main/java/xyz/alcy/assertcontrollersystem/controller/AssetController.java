@@ -17,21 +17,21 @@ public class AssetController {
     private AssetService assetService;
 
     //添加资产信息
-    @PostMapping("/manage/add")
+    @PostMapping("/manage")
     public Result assetAdd(@RequestBody AssetDTO assetDTO) {
         assetService.addAsset(assetDTO);
         return Result.success();
     }
 
     //获取所有资产信息
-    @GetMapping("/getAllAssets")
+    @GetMapping
     public Result<List<Asset>> getAllAssets() {
         return Result.success(assetService.getAllAssets());
     }
 
     //获取指定资产信息
-    @GetMapping
-    public Result getAsset(@RequestParam Integer assetNumber) {
+    @GetMapping("/{assetNumber}")
+    public Result getAsset(@PathVariable Integer assetNumber) {
         Asset asset = assetService.getAsset(assetNumber);
         if (asset == null) {
             return Result.error("无该资产信息");
@@ -40,18 +40,19 @@ public class AssetController {
     }
 
     //更新资产信息
-    @PutMapping("/manage/update")
-    private Result assetUpdate(@RequestBody AssetDTO assetDTO) {
-        if (assetService.getAsset(assetDTO.getAssetNumber()) == null) {
+    @PutMapping("/manage/{assetNumber}")
+    private Result assetUpdate(@RequestBody AssetDTO assetDTO, @PathVariable Integer assetNumber) {
+        if (assetService.getAsset(assetNumber) == null) {
             return Result.error("无该资产信息");
         }
+        assetDTO.setAssetNumber(assetNumber);
         assetService.updateAsset(assetDTO);
         return Result.success();
     }
 
     //删除指定资产信息
-    @DeleteMapping("/manage/delete")
-    private Result assetDelete(@RequestParam Integer assetNumber) {
+    @DeleteMapping("/manage/{assetNumber}")
+    private Result assetDelete(@PathVariable Integer assetNumber) {
         if (assetService.getAsset(assetNumber) == null) {
             return Result.error("无该资产信息");
         }
