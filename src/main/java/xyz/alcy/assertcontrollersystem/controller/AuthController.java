@@ -32,7 +32,6 @@ public class AuthController {
 
     //注册
     @PostMapping("/register")
-    //role   注册人角色  admin -> 管理员    common -> 普通用户
     public Result register(@Pattern(regexp = "^\\S{5,16}$") String username,
                            @Pattern(regexp = "^\\S{5,16}$") String password) {
         //在数据库中查找用户名是否已经存在
@@ -49,8 +48,8 @@ public class AuthController {
 
     //登录
     @PostMapping("/login")
-    public Result<String> login(@Pattern(regexp = "^\\S{5,16}$") String username,
-                                @Pattern(regexp = "^\\S{5,16}$") String password) {
+    public Result<String> login(@Pattern(regexp = "^\\S{1,16}$") String username,
+                                @Pattern(regexp = "^\\S{1,16}$") String password) {
         User loginUser = authService.findByUsername(username);
         if (loginUser == null) {
             return Result.error("用户名错误或未注册");
