@@ -11,7 +11,7 @@
 - 通过init-database.sql脚本创建所需要的数据库以及表
 
 
-- 修改application.yml文件的spring.datasource.password属性为自己数据库的密码
+- 修改application.yml文件的spring.datasource.password属性为自己数据库的密码；或者在启动服务器的时候添加控制台参数```spring.datasource.password="your password"```
 
 
 - 运行```/AssetControllerSystem/Redis-x64-3.2.100/redis-server.exe```文件启动Redis
